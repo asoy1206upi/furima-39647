@@ -31,7 +31,7 @@
 belongs_to :user
 belongs_to :purchase
 
-## purchases テーブル
+## Orders テーブル
 
 | Column     | Type       | Constraints |
 | ------     | ---------- | ----------- |
@@ -43,3 +43,17 @@ belongs_to :purchase
 
 - belongs_to :user
 - belongs_to :item
+
+## Addresses テーブル
+
+| Column     | Type       | Constraints |
+| ------     | ---------- | ----------- |
+| id         | integer    | PRIMARY KEY　|
+| item_id    | text       | NOT NULL　　 |
+| user_id    | text       | NOT NULL　　 |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+
