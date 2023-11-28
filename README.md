@@ -6,10 +6,10 @@
 | ----------------       | ------  | -----------    |
 | nickname               | string  | null: false    |
 | email                  | string  | null: false　　 |
-| password               | string  | null: false    |
-| encrypted_password     | string  | null: false    |
-| full_name              | string  | null: false    |
-| kana_name              | string  | null: false    |
+| last_name              | string  | null: false    |
+| first_name_            | string  | null: false    |
+| last_name_kana         | string  | null: false    |
+| last_name_kana         | string  | null: false    |
 | date_of_birth          | string  | null: false    |
 
 ### Association
@@ -20,9 +20,9 @@
 
 | Column        | Type       | Constraints       |
 | ------        | ------     | -----------       |
-| name          | integer    | PRIMARY KEY       | 
-| description   | string     | null: false       | 
-| price         | text       | null: false       | 
+| name          | string     | null: false       | 
+| description   | text       | null: false       | 
+| price         | string     | null: false       | 
 | user_id       | references | foreign_key: true |
 | created_at    | string     | null: false       |
 | updated_at    | string     | null: false       |
@@ -35,26 +35,29 @@ belongs_to :purchase
 ## Orders テーブル
 
 | Column     | Type       | Constraints |
-| ------     | ---------- | ----------- |
-| id         | integer    | PRIMARY KEY　|
-| item_id    | references | null: false,foreign_key: true |
-| user_id    | references | null: false,foreign_key: true |
+| -------    | ---------- | ----------- |
+| item　　　　| references | null: false,foreign_key: true |
+| user 　    | references | null: false,foreign_key: true |
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
+- belongs_to :Addresses
+- belongs_to :orders
 
 ## Addresses テーブル
 
-| Column  　   | Type       | Constraints |
-| ------   　  | ---------- | ----------- |
-| 　　　　　　　　| integer    | PRIMARY KEY|
-| 　　　　　　　　| references | null: false |
-|　　　　　　　　　 | references | null: false,foreign_key: true |
+| Column  　    | Type        | Constraints |
+| ------   　   | ----------  | ----------- |
+| address_line1 | text        | PRIMARY KEY|
+| address_line2 | text        | null: false |
+| city          | string      | null: false |
+| state         | string      | null: false |
+| country       | string      | null: false |
+| phone_number  | string      | null: false |
+| created_at    | datetime	  |
+| updated_at    | datetime	  |  
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
+- belongs_to :orders
 
