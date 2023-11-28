@@ -2,29 +2,30 @@
 
 ## users テーブル
 
-| Column             | Type    | Constraints      |
-| ------------------ | ------  | -----------      |
-| id                 | integer | PRIMARY KEY      |
-| email              | string  | NOT NULL, UNIQUE |
-| encrypted_password | string  | NOT NULL         |
-| name               | string  | NOT NULL         |
-| profile            | text    | NOT NULL         |
-| occupation         | text    | NOT NULL         |
-| position           | text    | NOT NULL         |
+| Column                 | Type    | Constraints    |
+| ----------------       | ------  | -----------    |
+| nickname               | string  | null: false    |
+| email                  | string  | null: false　　 |
+| password               | string  | null: false    |
+| encrypted_password     | string  | null: false    |
+| full_name              | string  | null: false    |
+| kana_name              | string  | null: false    |
+| date_of_birth          | string  | null: false    |
 
 ### Association
-- has_many :purchases
+- has_many :orders
 - has_many :items
 
 ## items テーブル
 
-| Column      | Type       | Constraints |
-| ------      | ------     | ----------- |
-| id          | integer    | PRIMARY KEY | 
-| name        | string     | NOT NULL 　　| 
-| description | text       | NOT NULL 　　| 
-| price       | integer    | NOT NULL 　　|
-| user_id     | string     | NOT NULL　　 |
+| Column        | Type       | Constraints       |
+| ------        | ------     | -----------       |
+| name          | integer    | PRIMARY KEY       | 
+| description   | string     | null: false       | 
+| price         | text       | null: false       | 
+| user_id       | references | foreign_key: true |
+| created_at    | string     | null: false       |
+| updated_at    | string     | null: false       |
 
 ### Association
 
@@ -36,8 +37,8 @@ belongs_to :purchase
 | Column     | Type       | Constraints |
 | ------     | ---------- | ----------- |
 | id         | integer    | PRIMARY KEY　|
-| item_id    | text       | NOT NULL　　 |
-| user_id    | text       | NOT NULL　　 |
+| item_id    | references | null: false,foreign_key: true |
+| user_id    | references | null: false,foreign_key: true |
 
 ### Association
 
@@ -46,11 +47,11 @@ belongs_to :purchase
 
 ## Addresses テーブル
 
-| Column     | Type       | Constraints |
-| ------     | ---------- | ----------- |
-| id         | integer    | PRIMARY KEY　|
-| item_id    | text       | NOT NULL　　 |
-| user_id    | text       | NOT NULL　　 |
+| Column  　   | Type       | Constraints |
+| ------   　  | ---------- | ----------- |
+| 　　　　　　　　| integer    | PRIMARY KEY|
+| 　　　　　　　　| references | null: false |
+|　　　　　　　　　 | references | null: false,foreign_key: true |
 
 ### Association
 
