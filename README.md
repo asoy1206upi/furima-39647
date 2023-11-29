@@ -16,6 +16,7 @@
 
 ### Association
 - has_many :orders
+  has_many :items
 
 ## items テーブル
 
@@ -33,8 +34,8 @@
 
 ### Association
 
-has_many :orders
-belong_to :items
+has_one :order
+belong_to :user
 
 ## Orders テーブル
 
@@ -47,7 +48,7 @@ belong_to :items
 
 belongs_to :users
 belongs_to :items
-has_one :Address
+has_one :address
 
 
 ## Addresses テーブル
@@ -55,14 +56,14 @@ has_one :Address
 | Column        | Type        | Constraints |
 | ------        | ----------  | ----------- |
 | area_id       | integer     | null: false |
-| prefecture_id | integer     | null: false |
+| origin_region_id | integer     | null: false |
 | city          | string      | null: false |
 | quantity      | string      | null: false |
 | total_topic   | string      | null: false |
 | purchase_date | string      | null: false |
-| updated_at    | references | null: false,foreign_key: true | 
+| order          | references | null: false,foreign_key: true | 
 
 ### Association
 
-- has_many :orders
+-belongs_to :order
 
