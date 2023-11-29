@@ -47,7 +47,8 @@ has_many :orders
 | address    | references | null: false,foreign_key: true |
 | quantity   | string     | null: false       |
 | price      | string     | null: false       |
-
+| created_at | string     | null: false,foreign_key: true      |
+| update_at  | string     | null: false,foreign_key: true      |
 
 ### Association
 
