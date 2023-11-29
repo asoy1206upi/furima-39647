@@ -35,7 +35,7 @@
 ### Association
 
 has_one :order
-belong_to :user
+belongs_to :user
 
 ## Orders テーブル
 
@@ -46,8 +46,8 @@ belong_to :user
 
 ### Association
 
-belongs_to :users
-belongs_to :items
+belongs_to :user
+belongs_to :item
 has_one :address
 
 
@@ -55,9 +55,8 @@ has_one :address
 
 | Column        | Type        | Constraints |
 | ------        | ----------  | ----------- |
-| area_id       | integer     | null: false |
+| area_id       | string     | null: false |
 | origin_region_id | integer     | null: false |
-| city          | string      | null: false |
 | quantity      | string      | null: false |
 | total_topic   | string      | null: false |
 | purchase_date | string      | null: false |
