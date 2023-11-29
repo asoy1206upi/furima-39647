@@ -55,12 +55,13 @@ has_one :address
 
 | Column        | Type        | Constraints |
 | ------        | ----------  | ----------- |
-| area_id       | string     | null: false |
-| origin_region_id | integer     | null: false |
-| quantity      | string      | null: false |
-| total_topic   | string      | null: false |
-| purchase_date | string      | null: false |
-| order          | references | null: false,foreign_key: true | 
+| postal_code   | string      | null: false |
+| prefecture_id | integer     | null: false |
+| city          | string      | null: false |
+| address       | string      | null: false |
+| building      | string      |  |
+| phone_number  | string      | null: false |
+| order         | references | null: false,foreign_key: true | 
 
 ### Association
 
