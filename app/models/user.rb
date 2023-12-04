@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :last_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'は全角で入力してください' }
-  validates :first_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'は全角で入力してください' }
+  validates :last_name, presence: true, format: {with: /\A[ァ-ヶー－ぁ-ん一-龠々]+\z/, message: 'は全角で入力してください' }
+  validates :first_name, presence: true, format: {with: /\A[ァ-ヶー－ぁ-ん一-龠々]+\z/, message: 'は全角で入力してください' }
   validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'は全角カナで入力してください' }
   validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'は全角カナで入力してください' }
   validates :date_of_birth, presence: true
