@@ -102,9 +102,10 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include "Date of birth can't be blank"
       end
       it '重複したメールアドレスは登録できない' do
-        @user.email = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to include "Email can't be blank"
+        @user.save
+        another_user = FactoryBot.build(:user, email: @user.email)
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include "Email has already been taken"
       end
     end
   end
