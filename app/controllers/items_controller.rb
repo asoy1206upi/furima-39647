@@ -12,8 +12,8 @@ class ItemsController < ApplicationController
     @item = current_user.items.build(item_params) #Item.new(item_params)
     if @item.save
       redirect_to root_path, notice: '商品を出品しました'
-      #redirect_to @item, notice: '商品を出品しました'
     else
+      @item = Item.new 
       render 'new'
     end
   end
