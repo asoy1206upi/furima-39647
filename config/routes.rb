@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'items#index'
-  get 'items#new', to: 'items#new'
+  get 'items/new', to: 'items#new' 
   # get 'login', to: 'sessions#new'
   # post 'login', to: 'sessions#create'
   # delete 'logout', to: 'sessions#destroy'
