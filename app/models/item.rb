@@ -3,11 +3,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category_id
-  belongs_to :product_condition_id
-  belongs_to :shipping_cost_id
-  belongs_to :prefecture_id
-  belongs_to :days_to_ship_id
+  belongs_to :category
+  belongs_to :product_condition
+  belongs_to :shipping_cost
+  belongs_to :prefecture
+  belongs_to :days_to_ship
 
   validates :image, presence: true
   validates :name, :description, :category_id, :product_condition_id, :shipping_cost_id, :prefecture_id, :days_to_ship_id, presence: true

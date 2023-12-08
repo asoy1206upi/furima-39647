@@ -132,7 +132,7 @@
       <li class='list'>
         <%= link_to "#" do %>
         <div class='item-img-content'>
-          <%= image_tag "item-sample.png", class: "item-img" %>
+          <%= image_tag item.image, class: "item-img" %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
           <div class='sold-out'>
@@ -146,16 +146,16 @@
             <%= item.name %>
           </h3>
           <div class='item-price'>
-            <span><%= "#{item.price}円" %><br><%= item.shipping_cost %></span>
+            <span><%= "#{item.price}円" %><br><%= item.shipping_cost.name %></span>
             <div class='star-btn'>
               <%= image_tag "star.png", class:"star-icon" %>
-              <span class='star-count'>0</span><%= item.likes.count %></span>
-          </div>
+              <span class='star-count'>0</span>
             </div>
           </div>
         </div>
         <% end %>
-      </li>
+       </li>
+      <% end %>
       <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
 
       <%# 商品がない場合は以下のダミー商品が表示されるようにしましょう %>
@@ -177,6 +177,7 @@
         </div>
         <% end %>
       </li>
+      <% end %>
       <%# //商品がある場合は表示されないようにしましょう %>
       <%# //商品がない場合は以下のダミー商品が表示されるようにしましょう %>
 
