@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   let(:user) { FactoryBot.create(:user) }
+  let(:item) { FactoryBot.build(:item, user: user) }
 
   describe '商品出品' do
-    let(:item) { FactoryBot.build(:item, user: user) }
 
     before do
      item.image.attach(io: File.open(Rails.root.join('test', 'fixtures', 'image.jpg')), filename: 'image.jpg', content_type: 'image/jpeg')
@@ -38,7 +38,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーが選択されていない場合、出品できない' do
-        item = FactoryBot.build(:item, user: user, category_id: nil)
+        item = FactoryBot.build(:item, user: user, category_id: '')
         item.valid?
         expect(item.errors.full_messages).to include "Category can't be blank"
       end
