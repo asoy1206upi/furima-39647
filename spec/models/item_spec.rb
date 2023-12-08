@@ -38,14 +38,29 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーが選択されていない場合、出品できない' do
-        item = FactoryBot.build(:item, user: user, category_id: '')
+        item = FactoryBot.build(:item, user: user, category_id: 1)
         item.valid?
         expect(item.errors.full_messages).to include "Category can't be blank"
       end
-      it "ジャンルが未選択の場合、登録できない" do
-        item = FactoryBot.build(:item, category_id: nil)
+      it '商品の状態が選択されていない場合、出品できない' do
+        item = FactoryBot.build(:item, user: user, product_condition_id: 1)
         item.valid?
-        expect(item.errors.full_messages).to include "Category can't be blank"
+        expect(item.errors.full_messages).to include "Product condition can't be blank"
+      end
+      it '配送料が選択されていない場合、出品できない' do
+        item = FactoryBot.build(:item, user: user, shipping_cost_id: 1)
+        item.valid?
+        expect(item.errors.full_messages).to include "Shipping cost can't be blank"
+      end
+      it '都道府県が選択されていない場合、出品できない' do
+        item = FactoryBot.build(:item, user: user, prefecture_id: 1)
+        item.valid?
+        expect(item.errors.full_messages).to include "Prefecture can't be blank"
+      end
+      it '配送までの日数が選択されていない場合、出品できない' do
+        item = FactoryBot.build(:item, user: user, days_to_ship_id: 1)
+        item.valid?
+        expect(item.errors.full_messages).to include "Days to ship can't be blank"
       end
       it '商品状態が選択されていない場合、出品できない' do
         item = FactoryBot.build(:item, user: user, product_condition_id: nil)

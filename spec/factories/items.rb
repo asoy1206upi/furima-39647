@@ -3,11 +3,11 @@ FactoryBot.define do
     name { "Sample Item" }
     price { 1000 }
     description { "This is a sample description" }
-    category_id { 1 }
-    product_condition_id { 1 }
-    shipping_cost_id { 1 }
-    prefecture_id { 1 }
-    days_to_ship_id { 1 }
+    category_id { 2 }
+    product_condition_id { 2 }
+    shipping_cost_id { 2 }
+    prefecture_id { 2 }
+    days_to_ship_id { 2 }
     association :user
     trait :with_image do
       after(:build) do |item|
