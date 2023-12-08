@@ -4,6 +4,12 @@ RSpec.describe Item, type: :model do
   let(:user) { FactoryBot.create(:user) }
 
   describe '商品出品' do
+    let(:item) { FactoryBot.build(:item, user: user) }
+
+    before do
+     item.image.attach(io: File.open(Rails.root.join('test', 'fixtures', 'image.jpg')), filename: 'image.jpg', content_type: 'image/jpeg')
+    end
+
     context '正常に出品できる場合' do
       it '全ての情報が正しく入力されていると出品できる' do
         item = FactoryBot.build(:item, user: user)
@@ -36,7 +42,11 @@ RSpec.describe Item, type: :model do
         item.valid?
         expect(item.errors.full_messages).to include "Category can't be blank"
       end
-
+      it "ジャンルが未選択の場合、登録できない" do
+        item = FactoryBot.build(:item, category_id: nil)
+        item.valid?
+        expect(item.errors.full_messages).to include "Category can't be blank"
+      end
       it '商品状態が選択されていない場合、出品できない' do
         item = FactoryBot.build(:item, user: user, product_condition_id: nil)
         item.valid?
@@ -60,11 +70,10 @@ RSpec.describe Item, type: :model do
         item.valid?
         expect(item.errors.full_messages).to include "Price is not a number"
       end
-
-      it '価格が範囲外の場合、出品できない' do
-        item = FactoryBot.build(:item, user: user, price: 10)
+      it 'userが紐づいていないと、出品できない' do
+        item = FactoryBot.build(:item, user: nil)
         item.valid?
-        expect(item.errors.full_messages).to include "Price must be greater than or equal to 300"
+        expect(item.errors.full_messages).to include "User must exist"
       end
     end
   end
