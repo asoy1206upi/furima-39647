@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
     context 'ユーザーが登録できるとき' do
       it '正常に登録できる' do
         expect(@user).to be_valid
-      end 
+      end
     end
     context 'ユーザー登録できないとき' do
       it 'nicknameが空では登録できない' do
