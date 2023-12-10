@@ -19,7 +19,7 @@
         <%= number_to_currency(@item.price, unit: '¥', precision: 0) %>
       </span>
       <span class="item-postage">
-        <%= "配送料負担: #{ShippingCost.find_by(id: @item.shipping_cost_id)&.name}" %>
+        <%= " #{ShippingCost.find_by(id: @item.shipping_cost_id)&.name}" %>
       </span>
     </div>
 
