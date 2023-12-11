@@ -16,14 +16,6 @@ class ItemsController < ApplicationController
     else
     render :new, status: :unprocessable_entity
     end
-  end 
-
-  def show
-    @item = Item.find(params[:id])
-  end
-
-  def edit
-    @item = Item.find(params[:id])
 
     unless current_user == @item.user
       redirect_to root_path, alert: '商品の編集権限がありません'
