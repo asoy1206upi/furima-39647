@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
       @item.destroy
     end
 
-    redirect_to root_path, alert: '商品の削除に失敗しました'
+    redirect_to root_path,
   end
 
   private
