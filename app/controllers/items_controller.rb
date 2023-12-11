@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -16,16 +17,17 @@ class ItemsController < ApplicationController
     else
     render :new, status: :unprocessable_entity
     end
+  end 
 
-    unless current_user == @item.user
-      redirect_to root_path, alert: '商品の編集権限がありません'
-    end
+  def show
+  end
+
+  def edit
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to @item
+      redirect_to @item, notice: '商品情報を更新しました'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,5 +37,15 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :price, :description, :category_id, :product_condition_id, :shipping_cost_id, :prefecture_id, :days_to_ship_id, :image)
+  end
+
+  def find_item
+    @item = Item.find(params[:id])
+  end
+
+  def authorize_user!
+    unless current_user == @item.user
+      redirect_to root_path, alert: '商品の編集権限がありません'
+    end
   end
 end
