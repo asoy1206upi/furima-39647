@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
+  before_action :find_item, only: [:show, :destroy]
+
   def index
     @items = Item.order(created_at: :desc)
   end
@@ -33,5 +35,9 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :price, :description, :category_id, :product_condition_id, :shipping_cost_id, :prefecture_id, :days_to_ship_id, :image)
+  end
+
+  def find_item
+    @item = Item.find(params[:id])
   end
 end
