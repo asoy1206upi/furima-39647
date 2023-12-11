@@ -23,6 +23,14 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    unless user_signed_in?
+      redirect_to new_user_session_path, alert: 'ログインしてください'
+      return
+    end
+    
+    unless current_user == @item.user
+      redirect_to root_path, alert: '商品の編集権限がありません'
+    end
   end
 
   def update
