@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
   def index
     @items = Item.order(created_at: :desc)
   end
@@ -19,6 +19,15 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+  end
+  
+  def destroy
+    @item = Item.find(params[:id])
+    if current_user == @item.user && @item.destroy
+      redirect_to root_path, notice: '商品を削除しました'
+    else
+      redirect_to root_path, alert: '商品の削除に失敗しました'
+    end
   end
 
   private
