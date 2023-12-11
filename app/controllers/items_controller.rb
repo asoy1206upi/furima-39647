@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
-  before_action :authorize_user!, only: [:edit, :update]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -24,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = find_item_by_id
+    @item = Item.find(params[:id])
 
     unless current_user == @item.user
       redirect_to root_path, alert: '商品の編集権限がありません'
