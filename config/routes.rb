@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   resources :items do
   resources :user
   resources :orders, only: [:index]
+  root to: 'orders#index'
+  resources :orders, only:[:create]
   end
 end
