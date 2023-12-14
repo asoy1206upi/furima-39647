@@ -1,14 +1,14 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :order
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :order, :token
 
   with_options presence: true do
+    validates :token
     validates :user_id
-  end
-  validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
-
-  def save
-    order = Order.create(item_id: item_id, user_id: user_id)
-    Address.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, phone_number: phone_number, building: building, order_id: order.id)
+    validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: "is invalid" }
+    validates :prefecture_id
+    validates :city
+    validates :address
+    validates :phone_number, length: { minimum: 11 }
   end
 end

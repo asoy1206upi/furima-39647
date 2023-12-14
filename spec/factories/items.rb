@@ -9,14 +9,17 @@ FactoryBot.define do
     prefecture_id { 2 }
     days_to_ship_id { 2 }
     association :user
-    trait :with_image do
-      after(:build) do |item|
-        item.image.attach(
-          io: File.open(Rails.root.join('spec', 'fixtures', 'image.jpg')),
-          filename: 'image.jpg',
-          content_type: 'image/jpeg'
-        )
-      end
+    # trait :with_image do
+    #   after(:build) do |item|
+    #     item.image.attach(
+    #       io: File.open(Rails.root.join('spec', 'fixtures', 'image.jpg')),
+    #       filename: 'image.jpg',
+    #       content_type: 'image/jpeg'
+    #     )
+    #   end
+    # end
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/apple-touch-icon.png'), filename: 'apple-touch-icon.png')
     end
   end
 end
