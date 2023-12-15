@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update]
+  before_action :item_sold_out?, only: [:edit, :update]
 
   def index
     @items = Item.order(created_at: :desc)
@@ -24,6 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
@@ -39,7 +41,7 @@ class ItemsController < ApplicationController
       @item.destroy
     end
 
-    redirect_to root_path,
+    redirect_to root_path
   end
 
   private
@@ -55,6 +57,12 @@ class ItemsController < ApplicationController
   def authorize_user!
     unless current_user == @item.user
       redirect_to root_path, alert: '商品の編集権限がありません'
+    end
+  end
+
+  def item_sold_out?
+    if @item.order.present?
+      redirect_to root_path
     end
   end
 end
