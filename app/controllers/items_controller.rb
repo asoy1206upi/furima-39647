@@ -24,6 +24,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @item.quantity <= 0
+      redirect_to root_path, alert: 'この商品は売り切れており編集できません'
+    end
   end
 
   def update

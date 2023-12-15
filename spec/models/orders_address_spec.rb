@@ -81,6 +81,12 @@ end
       @order_address.valid?
       expect(@order_address.errors[:token]).to include("can't be blank")
       end
+      it '電話番号が9桁以下では登録できない' do
+        @order_address.phone_number = '123456789'
+        @order_address.valid?
+        expect(@order_address.errors[:phone_number]).to include('is too short (minimum is 10 characters)')
+      end
+
     end
   end
 end
