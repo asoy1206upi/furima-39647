@@ -24,11 +24,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit
-    @item = Item.find
-  end
-
-
   private
 
   def find_item
