@@ -33,7 +33,7 @@ end
     end
 
     it '都道府県が空では登録できない' do
-      @order_address.prefecture_id = ''
+      @order_address.prefecture_id = nil
       @order_address.valid?
       expect(@order_address.errors[:prefecture_id]).to include("can't be blank")
     end
@@ -56,10 +56,30 @@ end
       expect(@order_address.errors[:phone_number]).to include("can't be blank")
     end
   
-    it '電話番号が10桁以下では登録できない' do
-      @order_address.phone_number = '1'
+    it '電話番号が12桁以上では登録できない' do
+      @order_address.phone_number = '111111111111'
       @order_address.valid?
-      expect(@order_address.errors[:phone_number]).to include("is too short (minimum is 11 characters)")
+      expect(@order_address.errors[:phone_number]).to include("is too long (maximum is 11 characters)")
+    end
+    it '半角英数字が含まれている場合、登録できない' do
+      @order_address.phone_number = 'abc'
+      @order_address.valid?
+      expect(@order_address.errors[:phone_number]).to include("is too short (minimum is 10 characters)")
+    end
+    it 'user_idが空では登録できない' do
+      @order_address.user_id = nil
+      @order_address.valid?
+      expect(@order_address.errors[:user_id]).to include("can't be blank")
+    end
+    it 'item_idが空では登録できない' do
+      @order_address.item_id = ''
+      @order_address.valid?
+      expect(@order_address.errors[:item_id]).to include("can't be blank")
+      end
+    it 'tokenが空では登録できない' do
+      @order_address.token = ''
+      @order_address.valid?
+      expect(@order_address.errors[:token]).to include("can't be blank")
       end
     end
   end

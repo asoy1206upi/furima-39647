@@ -5,11 +5,12 @@ class OrderAddress
   with_options presence: true do
     validates :token
     validates :user_id
+    validates :item_id
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: "is invalid" }
-    validates :prefecture_id
+    validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "must be selected" }
     validates :city
     validates :address
-    validates :phone_number, length: { minimum: 11 }
+    validates :phone_number, length: { minimum: 10, maximum: 11 }
   end
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
